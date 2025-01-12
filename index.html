@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
@@ -21,10 +21,8 @@
 
         let snake, food, direction, gameOver, gameStarted, score, highscore;
 
-        // Rekord betöltése a localStorage-ból
         highscore = localStorage.getItem('highscore') ? parseInt(localStorage.getItem('highscore')) : 0;
 
-        // A játék újraindítása
         function resetGame() {
             snake = [{ x: 10, y: 10 }];
             food = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
@@ -33,27 +31,26 @@
             gameOver = false;
             gameStarted = false;
             scoreElement.textContent = score;
-            startGame(); // Elindítjuk a játékot
+            startGame();
         }
 
-        // A játék indítása
+        
         function startGame() {
             if (!gameStarted) {
                 gameStarted = true;
-                gameLoop(); // A játéknak el kell indulnia
+                gameLoop(); 
             }
         }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Kígyó rajzolása
+
             snake.forEach(segment => {
                 ctx.fillStyle = 'darkred';
                 ctx.fillRect(segment.x * 20, segment.y * 20, 18, 18);
             });
 
-            // Étel rajzolása
             ctx.fillStyle = 'indianred';
             ctx.fillRect(food.x * 20, food.y * 20, 18, 18);
         }
@@ -62,7 +59,6 @@
             const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
             snake.unshift(head);
 
-            // Ellenőrizd, hogy a kígyó megeszi-e az ételt
             if (head.x === food.x && head.y === food.y) {
                 score++;
                 scoreElement.textContent = score;
@@ -71,7 +67,6 @@
                 snake.pop();
             }
 
-            // Ellenőrizzük a halál állapotát (fal, saját test)
             if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || collisionWithSelf(head)) {
                 gameOver = true;
             }
@@ -88,36 +83,34 @@
 
         function gameLoop() {
             if (gameOver) {
-                // Ha új rekordot döntött a játékos, mentsük el
+                
                 if (score > highscore) {
                     highscore = score;
                     localStorage.setItem('highscore', highscore);
                 }
-                highscoreElement.textContent = highscore; // Rekord frissítése
-                alert('Game Over! Pontszám: ' + score + '\nNyomj OK-t az újraindításhoz!'); // Játék vége üzenet
-                resetGame();  // Játék újraindítása
+                highscoreElement.textContent = highscore; 
+                alert('Game Over! Pontszám: ' + score + '\nNyomj OK-t az újraindításhoz!'); 
+                resetGame();  
                 return;
             }
 
             update();
             draw();
-            setTimeout(gameLoop, 100); // Újraindítja a ciklust
+            setTimeout(gameLoop, 100);
         }
 
         document.addEventListener('keydown', event => {
-            // Ha a játék még nem indult el, indítsuk el az első billentyű lenyomásakor
             if (!gameStarted) {
                 startGame();
             }
 
-            // Irányítás beállítása
             if (event.key === 'ArrowUp' && direction.y !== 1) direction = { x: 0, y: -1 };
             if (event.key === 'ArrowDown' && direction.y !== -1) direction = { x: 0, y: 1 };
             if (event.key === 'ArrowLeft' && direction.x !== 1) direction = { x: -1, y: 0 };
             if (event.key === 'ArrowRight' && direction.x !== -1) direction = { x: 1, y: 0 };
         });
 
-        resetGame();  // Játékot indítunk el a betöltéskor
+        resetGame();  
     </script>
 </body>
 </html>
