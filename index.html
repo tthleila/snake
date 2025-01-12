@@ -5,26 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kígyó Játék</title>
     <link href="style.css" rel="stylesheet" />
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
-
-        #scoreboard {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        canvas {
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
     <div id="scoreboard">
@@ -42,8 +22,7 @@
         let snake, food, direction, gameOver, gameStarted, score, highscore;
 
         highscore = localStorage.getItem('highscore') ? parseInt(localStorage.getItem('highscore')) : 0;
-
-        // A játék újraindítása
+        
         function resetGame() {
             snake = [{ x: 10, y: 10 }];
             food = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
@@ -55,7 +34,6 @@
             startGame();
         }
 
-        // A játék indítása
         function startGame() {
             if (!gameStarted) {
                 gameStarted = true;
@@ -65,8 +43,6 @@
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Pálya felosztása négyzetekre
             ctx.strokeStyle = 'lightgray';
             ctx.lineWidth = 0.5;
             for (let i = 0; i < 20; i++) {
@@ -78,13 +54,11 @@
                 ctx.stroke();
             }
 
-            // Kígyó rajzolása (zöld)
             snake.forEach(segment => {
-                ctx.fillStyle = 'green';  // A kígyó színe zöld
+                ctx.fillStyle = 'green';  
                 ctx.fillRect(segment.x * 20, segment.y * 20, 18, 18);
             });
 
-            // Étel rajzolása (vörös)
             ctx.fillStyle = 'indianred';
             ctx.fillRect(food.x * 20, food.y * 20, 18, 18);
         }
