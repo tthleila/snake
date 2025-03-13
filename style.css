@@ -1,18 +1,70 @@
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    color: #fff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 
-        #scoreboard {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+#scoreboard {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out;
+}
 
-        canvas {
-            border: 1px solid black;
-        }
+    #scoreboard:hover {
+        transform: scale(1.05);
+    }
+
+h1 {
+    font-size: 26px;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 18px;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+canvas {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+    canvas:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+button {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    margin-top: 15px;
+}
+
+    button:hover {
+        background: linear-gradient(135deg, #ff6a82, #ff758c);
+        transform: scale(1.1);
+    }
